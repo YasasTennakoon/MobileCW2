@@ -1,5 +1,6 @@
 package com.example.w1833600
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -27,73 +28,20 @@ class MainActivity : AppCompatActivity() {
         val movieDao=movieDatabase.movieDao()
         runBlocking {
             launch {
-               // val movie1=Movie("The Shawshank Redemption",1994)
+                val movie1=Movie(1,"The Shawshank Redemption",1994,"R","14 Oct 1994",
+                "142 min","Drama","Frank Darabont","Stephen King, Frank Darabont","Tim Robbins, Morgan Freeman, Bob Gunton","Two imprisoned men bond over a number of years, finding solace\n" +
+                            "and eventual redemption through acts of common decency.")
+                movieDao.insertMovie(movie1)
+
             }
         }
+        searchMovies.setOnClickListener {
+            var searchPage=Intent(this,SearchMovie::class.java)
+            startActivity(searchPage)
+        }
 
-        //       searchMovies.setOnClickListener withContext@{
-
-//            var MY_API_KEY = resources.getString(R.string.MY_API_KEY)
-//            var json:String="";
-//            val stb = StringBuilder("")
-//            var movie_name:String="Matrix";
-//            var url_string = "http://www.omdbapi.com/?t=$movie_name&apikey=$MY_API_KEY";
-//            val url = URL(url_string)
-//            val con = url.openConnection() as HttpURLConnection
-//            con.toString()
-//            print(con.toString());
-//
-//            print(stb);
-//            result.text=con.toString();
-
-//            val url = URL(url_string)
-//            val con = url.openConnection() as HttpURLConnection
-//            con.setRequestMethod("GET")
-//            print(con.toString())
-
-            //print(con.toString());
-
-
-     //   }
 
     }
 
-//    fun getWeather() {
-//
-//        var MY_API_KEY = resources.getString(R.string.MY_API_KEY)
-//        var movie_name:String="Matrix";
-//        var url_string = "http://www.omdbapi.com/?t=$movie_name&apikey=$MY_API_KEY";
-//
-//        var data: String = ""
-//
-//        // start the fetching of data in the background
-//        runBlocking {
-//            withContext(Dispatchers.IO) {
-//                // this will contain the whole of JSON
-//                val stb = StringBuilder("")
-//
-//                val url = URL(url_string)
-//                val con = url.openConnection() as HttpURLConnection
-//                val bf: BufferedReader
-//                try {
-//                    bf = BufferedReader(InputStreamReader(con.inputStream))
-//                }
-//                catch (e: IOException) {
-//                    e.printStackTrace()
-//                    return@withContext
-//                }
-//
-//                var line = bf.readLine()
-//                while (line != null) {
-//                    stb.append(line)
-//                    line = bf.readLine()
-//                }
-//
-//                print(stb.toString())
-//
-//
-//            }
-//
-//        }
-//    }
+
 }

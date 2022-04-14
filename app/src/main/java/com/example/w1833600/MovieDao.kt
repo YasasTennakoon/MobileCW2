@@ -10,7 +10,7 @@ interface MovieDao{
     @Query("Select * from movie")
     suspend fun getAll(): List<Movie>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUsers(vararg user: Movie)
+    suspend fun insertMovie(vararg user: Movie)
     @Insert
     suspend fun insertAll(vararg users: Movie)
 }
