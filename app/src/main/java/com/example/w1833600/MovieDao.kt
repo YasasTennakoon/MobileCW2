@@ -13,4 +13,6 @@ interface MovieDao{
     suspend fun insertMovie(vararg user: Movie)
     @Insert
     suspend fun insertAll(vararg users: Movie)
+    @Query("delete from movie ")
+    suspend fun deleteAll()
 }

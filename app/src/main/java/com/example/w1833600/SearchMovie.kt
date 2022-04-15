@@ -6,6 +6,7 @@ import android.text.method.ScrollingMovementMethod
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.room.Room
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -20,6 +21,7 @@ class SearchMovie : AppCompatActivity() {
     lateinit var movieName:EditText
     lateinit var retrieveMovie:Button
     lateinit var movie:TextView
+    lateinit var addMovie:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_movie)
@@ -27,9 +29,16 @@ class SearchMovie : AppCompatActivity() {
         retrieveMovie=findViewById(R.id.retrieveMovie)
         movie=findViewById(R.id.movie)
         movie.movementMethod= ScrollingMovementMethod()
+        addMovie=findViewById(R.id.addMovie)
+
 
         retrieveMovie.setOnClickListener {
             configWebApi()
+        }
+
+        addMovie.setOnClickListener {
+
+
         }
     }
 
