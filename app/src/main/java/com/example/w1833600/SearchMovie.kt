@@ -22,6 +22,17 @@ class SearchMovie : AppCompatActivity() {
     lateinit var retrieveMovie:Button
     lateinit var movie:TextView
     lateinit var addMovie:Button
+    //The data which are retrieved form the web Api
+    private var title=""
+    private var year=""
+    private var rate=""
+    private var released=""
+    private var runtime=""
+    private var genre=""
+    private var director=""
+    private var writer=""
+    private var actor=""
+    private var plot=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_movie)
@@ -37,8 +48,19 @@ class SearchMovie : AppCompatActivity() {
         }
 
         addMovie.setOnClickListener {
+            addDataToDatabase()
+        }
+    }
 
-
+    fun addDataToDatabase()
+    {
+        val movieDatabase=Room.databaseBuilder(this, MovieDatabase::class.java,"Movie").build()
+        val movieDao=movieDatabase.movieDao()
+        runBlocking {
+            launch {
+                var movie=Movie(title,year,rate,released,runtime,genre,director,writer,actor,plot)
+                movieDao.insertMovie(movie)
+              }
         }
     }
 
@@ -74,17 +96,17 @@ class SearchMovie : AppCompatActivity() {
     fun getData(retrieveMovie:StringBuffer) {
 
         val json = JSONObject(retrieveMovie.toString())
-        var title=json["Title"] as String
-        var year=json["Year"] as String
-        var rate=json["Rated"] as String
-        var released=json["Released"] as String
-        var runtime=json["Runtime"] as String
-        var genre=json["Genre"] as String
-        var director=json["Director"] as String
-        var writer=json["Writer"] as String
-        var actor=json["Actors"] as String
-        var plot=json["Plot"] as String
-        movie.text="Title :$title \n\n Year :$year \n\n Rating :$rate \n\n Released :$released \n\n Runtime :$runtime\n\n Genre :$genre \n\n " +
+         title=json["Title"] as String
+         year=json["Year"] as String
+         rate=json["Rated"] as String
+         released=json["Released"] as String
+         runtime=json["Runtime"] as String
+         genre=json["Genre"] as String
+         director=json["Director"] as String
+         writer=json["Writer"] as String
+         actor=json["Actors"] as String
+         plot=json["Plot"] as String
+         movie.text="Title :$title \n\n Year :$year \n\n Rating :$rate \n\n Released :$released \n\n Runtime :$runtime\n\n Genre :$genre \n\n " +
                 "Direcors :$director \n\n Writer :$writer \n\n Actors :$actor \n\n Plot :$plot"
         //movieData+="$year "
 
